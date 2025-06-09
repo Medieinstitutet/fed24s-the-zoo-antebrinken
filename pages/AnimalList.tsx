@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchAnimals } from "../services/animalService";
-import { iAnimal } from "../models/iAnimal";
+import { fetchAnimals } from "../service/animalService";
+import type { iAnimal } from "../models/iAnimal";
 import AnimalCard from "../components/AnimalCard";
 
 function AnimalList() {
-  const [animals, setAnimals] = useState<Animal[]>([]);
+  const [animals, setAnimals] = useState<iAnimal[]>([]);
 
   useEffect(() => {
     fetchAnimals().then(setAnimals);
