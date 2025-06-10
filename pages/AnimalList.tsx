@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAnimals } from "../service/animalService";
-import type { iAnimal } from "../models/iAnimal";
+import type { iAnimal } from "../src/models/iAnimal";
 
 
 function AnimalList() {
@@ -17,7 +17,7 @@ function AnimalList() {
     const now = new Date().getTime();
     const diffInHours = (now - fedTime) / 1000 / 60 / 60;
 
-    if (diffInHours >= 5) return "Desperat behov av mat";
+    if (diffInHours >= 5) return "Mata djoooret føhelvede!!!!11";
     if (diffInHours >= 3) return "Snart hungrig";
     return "Mätt";
   }
@@ -29,7 +29,7 @@ function AnimalList() {
 
   return (
     <div>
-      <h1>Djur på zoo:t</h1>
+      <h1>Djoooooren på zooooo:t</h1>
 
       <input
         type="text"
@@ -72,7 +72,7 @@ function AnimalList() {
                 <span
                   style={{
                     color:
-                      getFeedStatus(animal.lastFed) === "Desperat behov av mat"
+                      getFeedStatus(animal.lastFed) === "Mata djoooret føhelvede!!!!11"
                         ? "red"
                         : getFeedStatus(animal.lastFed) === "Snart hungrig"
                         ? "orange"

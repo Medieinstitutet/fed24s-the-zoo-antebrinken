@@ -1,4 +1,4 @@
-import type { iAnimal } from "../models/iAnimal";
+import type { iAnimal } from "../src/models/iAnimal";
 const API_URL = "https://animals.azurewebsites.net/api/animals";
 
 export async function fetchAnimals(): Promise<iAnimal[]> {
