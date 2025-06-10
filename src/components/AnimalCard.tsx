@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import type { iAnimal } from "../models/iAnimal";
 import FeedButton from "./FeedButton";
 

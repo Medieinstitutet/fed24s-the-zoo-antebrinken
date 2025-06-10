@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import React, { useEffect, useReducer } from "react";
 import type { iAnimal } from "../src/models/iAnimal";
 import { fetchAnimals } from "../service/animalService";
