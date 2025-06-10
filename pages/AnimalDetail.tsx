@@ -5,20 +5,21 @@ import { fetchAnimals } from "../service/animalService";
 
 type AnimalState = {
   animal: iAnimal | null;
-  timeSinceFed: number; // 
+  timeSinceFed: number;
 };
 
 type AnimalAction =
   | { type: "LOAD_ANIMAL"; payload: iAnimal }
   | { type: "FEED_ANIMAL" }
-  | { type: "UPDATE_TIME" };
+  | { type: "UPDATE_TIME"; payload: number };
 
 function animalReducer(state: AnimalState, action: AnimalAction): AnimalState {
   switch (action.type) {
     case "LOAD_ANIMAL": {
-      const fedTime = new Date(action.payload.lastFed).getTime();
-      const now = new Date().getTime();
-      const diffInHours = (now - fedTime) / 1000 / 60 / 60;
+      const stored = localStorage.getItem(`lastFed-${action.payload.id}`);
+      const lastFed = stored ? new Date(stored) : new Date(action.payload.lastFed);
+      const now = new Date();
+      const diffInHours = (now.getTime() - lastFed.getTime()) / 1000 / 60 / 60;
       return {
         animal: action.payload,
         timeSinceFed: diffInHours,
@@ -26,24 +27,20 @@ function animalReducer(state: AnimalState, action: AnimalAction): AnimalState {
     }
     case "FEED_ANIMAL": {
       if (!state.animal) return state;
-      const updatedAnimal = {
-        ...state.animal,
-        isFed: true,
-        lastFed: new Date().toISOString(),
-      };
+      const now = new Date();
+      localStorage.setItem(`lastFed-${state.animal.id}`, now.toISOString());
       return {
-        animal: updatedAnimal,
+        animal: {
+          ...state.animal,
+          lastFed: now.toISOString(),
+        },
         timeSinceFed: 0,
       };
     }
     case "UPDATE_TIME": {
-      if (!state.animal) return state;
-      const fedTime = new Date(state.animal.lastFed).getTime();
-      const now = new Date().getTime();
-      const diffInHours = (now - fedTime) / 1000 / 60 / 60;
       return {
         ...state,
-        timeSinceFed: diffInHours,
+        timeSinceFed: action.payload,
       };
     }
     default:
@@ -58,7 +55,13 @@ const AnimalDetail: React.FC = () => {
     timeSinceFed: 0,
   });
 
- 
+  // Funktion för att hämta status-text och färg
+  const getStatusMessage = (timeSinceFed: number) => {
+    if (timeSinceFed >= 4) return { text: "Hungrig! Mata nu!", color: "red" };
+    if (timeSinceFed >= 3) return { text: "Snart hungrig", color: "orange" };
+    return { text: "Mätt", color: "green" };
+  };
+
   useEffect(() => {
     const load = async () => {
       const allAnimals = await fetchAnimals();
@@ -70,17 +73,23 @@ const AnimalDetail: React.FC = () => {
     load();
   }, [id]);
 
- 
   useEffect(() => {
     const interval = setInterval(() => {
-      dispatch({ type: "UPDATE_TIME" });
+      if (!state.animal) return;
+      const stored = localStorage.getItem(`lastFed-${state.animal.id}`);
+      const lastFed = stored ? new Date(stored) : new Date(state.animal.lastFed);
+      const now = new Date();
+      const diffInHours = (now.getTime() - lastFed.getTime()) / 1000 / 60 / 60;
+      dispatch({ type: "UPDATE_TIME", payload: diffInHours });
     }, 60000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [state.animal]);
 
   if (!state.animal) return <div>Laddar...</div>;
 
   const { animal, timeSinceFed } = state;
+  const status = getStatusMessage(timeSinceFed);
 
   return (
     <div>
@@ -95,12 +104,7 @@ const AnimalDetail: React.FC = () => {
       />
       <p>{animal.longDescription}</p>
 
-      {timeSinceFed >= 4 && (
-        <p style={{ color: "red", fontWeight: "bold" }}>Hungrig! Mata nu!</p>
-      )}
-      {timeSinceFed >= 3 && timeSinceFed < 4 && (
-        <p style={{ color: "orange" }}>Snart hungrig</p>
-      )}
+      <p style={{ color: status.color, fontWeight: "bold" }}>{status.text}</p>
 
       <button
         onClick={() => dispatch({ type: "FEED_ANIMAL" })}
