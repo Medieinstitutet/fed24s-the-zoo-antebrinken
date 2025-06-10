@@ -7,13 +7,12 @@ import { Link } from "react-router-dom";
 function AnimalList() {
   const [animals, setAnimals] = useState<iAnimal[]>([]);
   const [filter, setFilter] = useState("");
-  
+  const [, setRefresh] = useState(0); // för att tvinga rerender när vi matar
 
   useEffect(() => {
     fetchAnimals().then(setAnimals);
   }, []);
 
-  
   function getLastFed(animal: iAnimal) {
     const stored = localStorage.getItem(`lastFed-${animal.id}`);
     return stored ? stored : animal.lastFed;
@@ -36,6 +35,19 @@ function AnimalList() {
     return "green";
   }
 
+  
+  function feedAnimal(animal: iAnimal) {
+    const lastFed = getLastFed(animal);
+    const fedTime = new Date(lastFed).getTime();
+    const now = new Date().getTime();
+    const diffInHours = (now - fedTime) / 1000 / 60 / 60;
+
+    if (diffInHours < 4) return; 
+
+    localStorage.setItem(`lastFed-${animal.id}`, new Date().toISOString());
+    setRefresh((prev) => prev + 1); 
+  }
+
   const filteredAnimals = animals.filter((animal) =>
     animal.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -55,40 +67,56 @@ function AnimalList() {
       {filteredAnimals.length === 0 && <p>Inga djur hittades.</p>}
 
       <ul style={{ listStyle: "none", padding: 0 }}>
-        {filteredAnimals.map((animal) => (
-          <li key={animal.id}>
-            <Link
-              to={`/animals/${animal.id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+        {filteredAnimals.map((animal) => {
+          const lastFed = getLastFed(animal);
+          const feedStatus = getFeedStatus(lastFed);
+          const canFeed = (new Date().getTime() - new Date(lastFed).getTime()) / 1000 / 60 / 60 >= 4;
+
+          return (
+            <li key={animal.id} style={{ marginBottom: "1rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <img
-                  src={animal.imageUrl}
-                  alt={animal.name}
-                  onError={(e) => {
-                    e.currentTarget.src = "/default-animal.jpg";
+                <Link
+                  to={`/animals/${animal.id}`}
+                  style={{ textDecoration: "none", color: "inherit", flexGrow: 1, display: "flex", alignItems: "center", gap: "1rem" }}
+                >
+                  <img
+                    src={animal.imageUrl}
+                    alt={animal.name}
+                    onError={(e) => {
+                      e.currentTarget.src = "/default-animal.jpg";
+                    }}
+                    style={{ width: "120px", height: "auto", borderRadius: "6px" }}
+                  />
+                  <div>
+                    <h2>{animal.name}</h2>
+                    <p>{animal.shortDescription}</p>
+                    <p>
+                      <strong>Status:</strong>{" "}
+                      <span style={{ color: getStatusColor(lastFed), fontWeight: "bold" }}>
+                        {feedStatus}
+                      </span>
+                    </p>
+                  </div>
+                </Link>
+
+                <button
+                  onClick={() => feedAnimal(animal)}
+                  disabled={!canFeed}
+                  style={{
+                    backgroundColor: canFeed ? "#4CAF50" : "#ccc",
+                    color: canFeed ? "white" : "#666",
+                    cursor: canFeed ? "pointer" : "not-allowed",
+                    padding: "10px 20px",
+                    border: "none",
+                    borderRadius: "5px",
                   }}
-                  style={{ width: "120px", height: "auto", borderRadius: "6px" }}
-                />
-                <div>
-                  <h2>{animal.name}</h2>
-                  <p>{animal.shortDescription}</p>
-                  <p>
-                    <strong>Status:</strong>{" "}
-                    <span
-                      style={{
-                        color: getStatusColor(getLastFed(animal)),
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {getFeedStatus(getLastFed(animal))}
-                    </span>
-                  </p>
-                </div>
+                >
+                  Mata
+                </button>
               </div>
-            </Link>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
