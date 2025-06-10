@@ -10,6 +10,7 @@ interface AnimalContextValue {
 
 const AnimalContext = createContext<AnimalContextValue | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAnimalContext = () => {
   const context = useContext(AnimalContext);
   if (!context) throw new Error("useAnimalContext must be used within AnimalProvider");

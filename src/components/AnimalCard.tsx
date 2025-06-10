@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import type { iAnimal } from "../models/iAnimal";
+import FeedButton from "./FeedButton";
+
+
 
 function AnimalCard({ animal }: { animal: iAnimal }) {
+  console.log("Renderar AnimalCard för:", animal.name);
   const timeSinceFed = new Date().getTime() - new Date(animal.lastFed).getTime();
   const hoursSinceFed = timeSinceFed / (1000 * 60 * 60);
 
@@ -23,6 +27,9 @@ function AnimalCard({ animal }: { animal: iAnimal }) {
       <p>{animal.shortDescription}</p>
       <p>Status: {status}</p>
       <Link to={`/animals/${animal.id}`}>Läs mer</Link>
+      <div style={{ border: "1px solid red" }}>
+  <FeedButton animalId={animal.id} />
+</div>
     </div>
   );
 }

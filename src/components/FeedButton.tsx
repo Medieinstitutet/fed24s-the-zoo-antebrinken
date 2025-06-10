@@ -17,7 +17,7 @@ function FeedButton({ animalId }: FeedButtonProps) {
       setHoursSinceFed(diff);
     }, 60 * 1000);
 
-    // Räkna direkt vid mount
+    
     const now = new Date();
     const diff = (now.getTime() - getLastFed(animalId).getTime()) / 1000 / 60 / 60;
     setHoursSinceFed(diff);
@@ -31,9 +31,9 @@ function FeedButton({ animalId }: FeedButtonProps) {
   };
 
   const getStatusText = () => {
-    if (hoursSinceFed >= 5) return "Måste ha maaaat!!!";
+    if (hoursSinceFed >= 5) return "Måste matas!!!!";
     if (hoursSinceFed >= 3) return "Hungrig";
-    return "Mätt";
+    return "😌 Mätt";
   };
 
   return (
