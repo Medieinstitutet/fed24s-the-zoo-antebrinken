@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { fetchAnimals } from "../service/animalService";
-import type { iAnimal } from "../src/models/iAnimal";
+import { fetchAnimals } from "../../service/animalService";
+import type { iAnimal } from "../models/iAnimal";
 import { Link } from "react-router-dom";
 
 
 function AnimalList() {
   const [animals, setAnimals] = useState<iAnimal[]>([]);
   const [filter, setFilter] = useState("");
-  const [, setRefresh] = useState(0); // för att tvinga rerender när vi matar
+  const [, setRefresh] = useState(0); 
 
   useEffect(() => {
     fetchAnimals().then(setAnimals);

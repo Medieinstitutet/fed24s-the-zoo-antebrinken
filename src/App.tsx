@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
-import AnimalList from "../pages/AnimalList";
-import AnimalDetail from "../pages/AnimalDetail";
+import Home from "./pages/HomePage";
+import AnimalList from "./pages/AnimalList";
+import AnimalDetail from "./pages/AnimalDetail";
 import { AnimalProvider } from "./contexts/AnimalContext";
 
 function App() {
