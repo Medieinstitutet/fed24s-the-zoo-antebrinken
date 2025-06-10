@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayout from "./MainLayout";
-import ErrorPage from "./ErrorPage";
-import AnimalList from "./AnimalList";
-import AnimalDetail from "./AnimalDetail";
-import HomePage from "./HomePage";
+import MainLayout from "../layouts/MainLayout"
+import ErrorPage from "../pages/ErrorPage";
+import AnimalList from "../pages/AnimalList";
+import AnimalDetail from "../pages/AnimalDetail";
+import HomePage from "../pages/HomePage";
 
 export default function AppRouter() {
   return (

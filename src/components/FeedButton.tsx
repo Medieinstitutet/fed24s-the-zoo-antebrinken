@@ -33,7 +33,7 @@ function FeedButton({ animalId }: FeedButtonProps) {
   const getStatusText = () => {
     if (hoursSinceFed >= 5) return "Måste matas!!!!";
     if (hoursSinceFed >= 3) return "Hungrig";
-    return "😌 Mätt";
+    return "Mätt";
   };
 
   return (

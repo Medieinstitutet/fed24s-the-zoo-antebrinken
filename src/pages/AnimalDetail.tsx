@@ -55,7 +55,7 @@ const AnimalDetail: React.FC = () => {
     timeSinceFed: 0,
   });
 
-  // Funktion för att hämta status-text och färg
+ 
   const getStatusMessage = (timeSinceFed: number) => {
     if (timeSinceFed >= 4) return { text: "Hungrig! Mata nu!", color: "red" };
     if (timeSinceFed >= 3) return { text: "Snart hungrig", color: "orange" };
