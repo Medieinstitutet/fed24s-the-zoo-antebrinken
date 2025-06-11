@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useReducer } from "react";
 import type { iAnimal } from "../models/iAnimal";
 import { fetchAnimals } from "../service/animalService";
+import FallbackImage from "../components/FallbackImage"; 
 
 type AnimalState = {
   animal: iAnimal | null;
@@ -48,17 +49,16 @@ function animalReducer(state: AnimalState, action: AnimalAction): AnimalState {
   }
 }
 
-const AnimalDetail: React.FC = () => {
+function AnimalDetail() {
   const { id } = useParams<{ id: string }>();
   const [state, dispatch] = useReducer(animalReducer, {
     animal: null,
     timeSinceFed: 0,
   });
 
- 
-  const getStatusMessage = (timeSinceFed: number) => {
-    if (timeSinceFed >= 4) return { text: "Hungrig! Mata nu!", color: "red" };
-    if (timeSinceFed >= 3) return { text: "Snart hungrig", color: "orange" };
+  const getStatusMessage = (time: number) => {
+    if (time >= 4) return { text: "Hungrig! Mata nu!", color: "red" };
+    if (time >= 3) return { text: "Snart hungrig", color: "orange" };
     return { text: "Mätt", color: "green" };
   };
 
@@ -94,18 +94,14 @@ const AnimalDetail: React.FC = () => {
   return (
     <div>
       <h2>{animal.name}</h2>
-      <img
+      <FallbackImage
         src={animal.imageUrl}
+        fallback="/fallback.jpg"
         alt={animal.name}
-        onError={(e) => {
-          e.currentTarget.src = "/fallback.jpg";
-        }}
         style={{ maxWidth: "400px", height: "auto" }}
       />
       <p>{animal.longDescription}</p>
-
       <p style={{ color: status.color, fontWeight: "bold" }}>{status.text}</p>
-
       <button
         onClick={() => dispatch({ type: "FEED_ANIMAL" })}
         disabled={timeSinceFed < 4}
@@ -123,6 +119,6 @@ const AnimalDetail: React.FC = () => {
       </button>
     </div>
   );
-};
+}
 
 export default AnimalDetail;

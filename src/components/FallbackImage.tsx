@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties } from "react";
+import React, { useState, type CSSProperties } from "react";
 
 interface FallbackImageProps {
   src: string;
