@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import type { iAnimal } from "../models/iAnimal";
 import { fetchAnimals } from "../service/animalService";
 import FallbackImage from "../components/FallbackImage"; 
