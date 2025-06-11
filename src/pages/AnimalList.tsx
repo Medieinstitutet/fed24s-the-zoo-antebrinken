@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAnimals } from "../../service/animalService";
+import { fetchAnimals } from "../service/animalService";
 import type { iAnimal } from "../models/iAnimal";
 import { Link } from "react-router-dom";
 
@@ -83,7 +83,7 @@ function AnimalList() {
                     src={animal.imageUrl}
                     alt={animal.name}
                     onError={(e) => {
-                      e.currentTarget.src = "/default-animal.jpg";
+                      e.currentTarget.src = "/fallback.jpg";
                     }}
                     style={{ width: "120px", height: "auto", borderRadius: "6px" }}
                   />

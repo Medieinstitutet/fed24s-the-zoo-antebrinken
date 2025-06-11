@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { iAnimal } from "../models/iAnimal";
-import { fetchAnimals } from "../../service/animalService";
+import { fetchAnimals } from "../service/animalService";
 
 interface AnimalContextValue {
   animals: iAnimal[];

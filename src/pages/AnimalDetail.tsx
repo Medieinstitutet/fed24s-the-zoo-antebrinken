@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useReducer } from "react";
 import type { iAnimal } from "../models/iAnimal";
-import { fetchAnimals } from "../../service/animalService";
+import { fetchAnimals } from "../service/animalService";
 
 type AnimalState = {
   animal: iAnimal | null;
@@ -98,7 +98,7 @@ const AnimalDetail: React.FC = () => {
         src={animal.imageUrl}
         alt={animal.name}
         onError={(e) => {
-          e.currentTarget.src = "/default-animal.jpg";
+          e.currentTarget.src = "/fallback.jpg";
         }}
         style={{ maxWidth: "400px", height: "auto" }}
       />
