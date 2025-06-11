@@ -1,13 +1,10 @@
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 
-interface FallbackImageProps {
-  src: string;
+type FallbackImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   fallback: string;
-  alt: string;
-  style?: CSSProperties;
-}
+};
 
-function FallbackImage({ src, fallback, alt, style }: FallbackImageProps) {
+function FallbackImage({ fallback, src, ...rest }: FallbackImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
 
   const handleError = () => {
@@ -17,9 +14,8 @@ function FallbackImage({ src, fallback, alt, style }: FallbackImageProps) {
   return (
     <img
       src={imgSrc}
-      alt={alt}
       onError={handleError}
-      style={style}
+      {...rest}
     />
   );
 }
