@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { fetchAnimals } from "../service/animalService";
 import type { iAnimal } from "../models/iAnimal";
 import { Link } from "react-router-dom";
-
+import FallbackImage from "../components/FallbackImage"; 
 
 function AnimalList() {
   const [animals, setAnimals] = useState<iAnimal[]>([]);
   const [filter, setFilter] = useState("");
-  const [, setRefresh] = useState(0); 
+  const [, setRefresh] = useState(0);
 
   useEffect(() => {
     fetchAnimals().then(setAnimals);
@@ -35,17 +35,16 @@ function AnimalList() {
     return "green";
   }
 
-  
   function feedAnimal(animal: iAnimal) {
     const lastFed = getLastFed(animal);
     const fedTime = new Date(lastFed).getTime();
     const now = new Date().getTime();
     const diffInHours = (now - fedTime) / 1000 / 60 / 60;
 
-    if (diffInHours < 4) return; 
+    if (diffInHours < 4) return;
 
     localStorage.setItem(`lastFed-${animal.id}`, new Date().toISOString());
-    setRefresh((prev) => prev + 1); 
+    setRefresh((prev) => prev + 1);
   }
 
   const filteredAnimals = animals.filter((animal) =>
@@ -70,21 +69,27 @@ function AnimalList() {
         {filteredAnimals.map((animal) => {
           const lastFed = getLastFed(animal);
           const feedStatus = getFeedStatus(lastFed);
-          const canFeed = (new Date().getTime() - new Date(lastFed).getTime()) / 1000 / 60 / 60 >= 4;
+          const canFeed =
+            (new Date().getTime() - new Date(lastFed).getTime()) / 1000 / 60 / 60 >= 4;
 
           return (
             <li key={animal.id} style={{ marginBottom: "1rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                 <Link
                   to={`/animals/${animal.id}`}
-                  style={{ textDecoration: "none", color: "inherit", flexGrow: 1, display: "flex", alignItems: "center", gap: "1rem" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    flexGrow: 1,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                  }}
                 >
-                  <img
+                  <FallbackImage
                     src={animal.imageUrl}
+                    fallback="/fallback.jpg"
                     alt={animal.name}
-                    onError={(e) => {
-                      e.currentTarget.src = "/fallback.jpg";
-                    }}
                     style={{ width: "120px", height: "auto", borderRadius: "6px" }}
                   />
                   <div>
@@ -92,7 +97,12 @@ function AnimalList() {
                     <p>{animal.shortDescription}</p>
                     <p>
                       <strong>Status:</strong>{" "}
-                      <span style={{ color: getStatusColor(lastFed), fontWeight: "bold" }}>
+                      <span
+                        style={{
+                          color: getStatusColor(lastFed),
+                          fontWeight: "bold",
+                        }}
+                      >
                         {feedStatus}
                       </span>
                     </p>
