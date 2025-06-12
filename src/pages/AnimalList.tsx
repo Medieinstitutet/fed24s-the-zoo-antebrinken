@@ -40,7 +40,7 @@ function AnimalList() {
 
   return (
     <div>
-      <h1>Djoooooren på zooooo:t</h1>
+      
 
       <input
         type="text"

@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+
+.metallic-blue {
+  background: linear-gradient(135deg, #0a1a2f, #1c3b64, #0a1a2f);
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
