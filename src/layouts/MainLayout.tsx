@@ -9,10 +9,10 @@ export default function MainLayout() {
           <h1 className="text-white text-xl font-semibold"> The Zoo App by Philip</h1>
         <nav className="flex space-x-8">
           <div>
-          <Link to="/" className="mr-4 text-white hover:underline">Hem</Link>
+          <Link to="/" className="text-xl text-white hover:underline">Hem</Link>
           </div>
           <div>
-          <Link to="/animals" className="text-white hover:underline">Djur</Link>
+          <Link to="/animals" className="text-xl text-white hover:underline">Djur</Link>
         </div>
         </nav>
         </div>
@@ -45,9 +45,9 @@ export default function MainLayout() {
     <div>
       <h2 className="text-lg font-semibold mb-2">Följ oss</h2>
       <ul className="flex space-x-4">
-        <li><a href="https://facebook.com" className="hover:underline">Facebook</a></li>
-        <li><a href="https://instagram.com" className="hover:underline">Instagram</a></li>
-        <li><a href="https://twitter.com" className="hover:underline">Twitter</a></li>
+        <li><a href="" className="hover:underline">Facebook</a></li>
+        <li><a href="" className="hover:underline">Instagram</a></li>
+        <li><a href="" className="hover:underline">Twitter</a></li>
       </ul>
     </div>
     </div>
