@@ -39,9 +39,9 @@ function AnimalList() {
   );
 
   return (
-    <div>
+    
       
-
+       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <input
         type="text"
         placeholder="Filtrera på namn..."
@@ -52,27 +52,25 @@ function AnimalList() {
 
       {filteredAnimals.length === 0 && <p>Inga djur hittades.</p>}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 list-none" >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 list-none" >
         {filteredAnimals.map((animal) => {
           const lastFed = getLastFed(animal);
           const feedStatus = getFeedStatus(lastFed);
 
           return (
-            <li key={animal.id}  className="my-2">
-             <div className="bg-white p-4 rounded shadow flex flex-col items-center w-full max-w-xs mx-auto border border-black">
+            <li key={animal.id}  className="my-2 w-full h-full">
+             <div className="relative w-full h-[500px] rounded overflow-hidden shadow border border-black">
                 <Link
                   to={`/animals/${animal.id}`}
-                   className="flex flex-col items-center gap-4 no-underline text-inherit"
->
-                
+                   className="flex flex-col items-center gap-6 no-underline text-inherit">
                   <FallbackImage
                     src={animal.imageUrl}
                     fallback="/fallback.jpg"
                     alt={animal.name}
-                    className="w-[120px] h-[120px] object-cover object-top rounded-[6px]"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
-                   <div className="mt-2 text-center">
-        <h2 className="text-lg font-semibold">{animal.name}</h2>
+                   <div className="absolute inset-0 flex flex-col justify-end text-black p-4 bg-gradient-to-t from-white/90 via-white/50 to-transparent">
+        <h2 className="text-xl font-semibold">{animal.name}</h2>
         <p className="text-sm break-words">{animal.shortDescription}</p>
         <p className="mt-1 text-sm">
                       <strong>Status:</strong>{" "}
@@ -88,6 +86,7 @@ function AnimalList() {
         })}
       </div>
     </div>
+
   );
 }
 
