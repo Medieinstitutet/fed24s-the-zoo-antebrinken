@@ -5,7 +5,7 @@ export default function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <header className="metallic-blue p-6">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
+        <div className="flex justify-between items-center px-14">
           <h1 className="text-white text-xl font-semibold"> The Zoo App by Philip</h1>
         <nav className="flex space-x-8">
           <div>
