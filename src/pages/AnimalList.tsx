@@ -22,16 +22,16 @@ function AnimalList() {
     const now = new Date().getTime();
     const diffInHours = (now - fedTime) / 1000 / 60 / 60;
 
-    if (diffInHours >= 5) return "Mata djoooret føhelvede!!!!11";
+    if (diffInHours >= 5) return "Mata djuret!";
     if (diffInHours >= 3) return "Snart hungrig";
     return "Mätt";
   }
 
   function getStatusColor(lastFed: string) {
     const status = getFeedStatus(lastFed);
-    if (status === "Mata djoooret føhelvede!!!!11") return "red";
-    if (status === "Snart hungrig") return "orange";
-    return "green";
+    if (status === "Mata djuret!") return "text-red-500";
+    if (status === "Snart hungrig") return "text-orange-400";
+    return "text-green-600";
   }
 
   const filteredAnimals = animals.filter((animal) =>
@@ -47,49 +47,38 @@ function AnimalList() {
         placeholder="Filtrera på namn..."
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%" }}
+       className="w-full p-2 mb-4 border rounded"
       />
 
       {filteredAnimals.length === 0 && <p>Inga djur hittades.</p>}
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 list-none" >
         {filteredAnimals.map((animal) => {
           const lastFed = getLastFed(animal);
           const feedStatus = getFeedStatus(lastFed);
 
           return (
-            <li key={animal.id} style={{ marginBottom: "1rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <li key={animal.id}  className="my-2">
+              <div>
                 <Link
                   to={`/animals/${animal.id}`}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    flexGrow: 1,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                  }}
-                >
+                   className="flex flex-col items-center gap-4 no-underline text-inherit"
+>
+                
                   <FallbackImage
                     src={animal.imageUrl}
                     fallback="/fallback.jpg"
                     alt={animal.name}
-                    style={{ width: "120px", height: "auto", borderRadius: "6px" }}
+                    className="w-[120px] h-[120px] object-cover object-top rounded-[6px]"
                   />
                   <div>
                     <h2>{animal.name}</h2>
                     <p>{animal.shortDescription}</p>
                     <p>
                       <strong>Status:</strong>{" "}
-                      <span
-                        style={{
-                          color: getStatusColor(lastFed),
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {feedStatus}
-                      </span>
+                      <span className={`font-bold ${getStatusColor(lastFed)}`}>
+                  {feedStatus}
+                 </span>
                     </p>
                   </div>
                 </Link>
@@ -97,7 +86,7 @@ function AnimalList() {
             </li>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 }
