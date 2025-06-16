@@ -59,7 +59,7 @@ function AnimalList() {
 
           return (
             <li key={animal.id}  className="my-2">
-              <div>
+             <div className="bg-white p-4 rounded shadow flex flex-col items-center w-full max-w-xs mx-auto border border-black">
                 <Link
                   to={`/animals/${animal.id}`}
                    className="flex flex-col items-center gap-4 no-underline text-inherit"
@@ -71,10 +71,10 @@ function AnimalList() {
                     alt={animal.name}
                     className="w-[120px] h-[120px] object-cover object-top rounded-[6px]"
                   />
-                  <div>
-                    <h2>{animal.name}</h2>
-                    <p>{animal.shortDescription}</p>
-                    <p>
+                   <div className="mt-2 text-center">
+        <h2 className="text-lg font-semibold">{animal.name}</h2>
+        <p className="text-sm break-words">{animal.shortDescription}</p>
+        <p className="mt-1 text-sm">
                       <strong>Status:</strong>{" "}
                       <span className={`font-bold ${getStatusColor(lastFed)}`}>
                   {feedStatus}
