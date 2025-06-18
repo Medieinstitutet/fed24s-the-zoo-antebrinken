@@ -12,7 +12,7 @@ function HomePage() {
         
         <div className="absolute inset-0  bg-opacity-50 flex items-center justify-center rounded">
           <h1 className="text-black text-4xl md:text-5xl font-bold text-center">
-            Välkommen till Djurparken 🐾
+            Välkommen till Djurparken 
           </h1>
           </div>
         </div>
@@ -21,12 +21,12 @@ function HomePage() {
       
       <div className="text-center">
         <p className="text-xl mb-4">Träffa och mata Philips djur!</p>
-        <Link
-          to="/animals"
-          className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded text-lg font-semibold"
-        >
-          Gå till djuren →
-        </Link>
+      <Link
+  to="/animals"
+  className="btn btn-pulse inline-block bg-green-600 hover:bg-green-700 text-white rounded text-lg font-semibold"
+>
+  Gå till djuren →
+</Link>
       </div>
 
       
