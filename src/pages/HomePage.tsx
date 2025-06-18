@@ -7,10 +7,11 @@ function HomePage() {
      
       <div
         className="relative h-64 md:h-80 rounded shadow-lg bg-cover bg-center"
+         style={{ backgroundImage: "url('/natur.jpg')" }}
         
       >
         
-        <div className="absolute inset-0  bg-opacity-50 flex items-center justify-center rounded">
+        <div className="absolute inset-0 bg-gradient-to-t from white/90 via-white/50 to-transparent flex items-center justify-center rounded">
           <h1 className="text-black text-4xl md:text-5xl font-bold text-center">
             Välkommen till Djurparken 
           </h1>
