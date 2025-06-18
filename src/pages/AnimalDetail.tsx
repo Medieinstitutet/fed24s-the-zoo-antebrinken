@@ -4,6 +4,7 @@ import type { iAnimal } from "../models/iAnimal";
 import { fetchAnimals } from "../service/animalService";
 import FallbackImage from "../components/FallbackImage"; 
 
+
 type AnimalState = {
   animal: iAnimal | null;
   timeSinceFed: number;
@@ -103,7 +104,7 @@ function AnimalDetail() {
             src={animal.imageUrl}
             fallback="/fallback.jpg"
             alt={animal.name}
-            className="w-full h-[600px] object-cover"
+            className={`w-full ${animal.id === 9 ? "h-[750px]" : "h-[600px]"} object-cover`}
           />
         </div>
 
@@ -116,6 +117,8 @@ function AnimalDetail() {
 
           <div className="mt-6">
             <p className={`font-bold text-${status.color}-500 mb-2`}>{status.text}</p>
+             <div className="flex justify-between items-center">
+    
             <button
               onClick={() => dispatch({ type: "FEED_ANIMAL" })}
               disabled={timeSinceFed < 4}
@@ -127,9 +130,15 @@ function AnimalDetail() {
             >
               Mata
             </button>
+            <button
+      onClick={() => window.history.back()}
+      className="px-4 py-2 bg-sky-700 hover:bg-sky-900 text-white rounded font-semibold"
+    >
+      Tillbaka
+    </button>
           </div>
         </div>
-
+</div>
       </div>
     </div>
   </div>
