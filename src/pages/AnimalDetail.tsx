@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useReducer } from "react";
+import { motion } from "framer-motion";
 import type { iAnimal } from "../models/iAnimal";
 import { fetchAnimals } from "../service/animalService";
-import FallbackImage from "../components/FallbackImage"; 
-
+import FallbackImage from "../components/FallbackImage";
 
 type AnimalState = {
   animal: iAnimal | null;
@@ -93,56 +93,60 @@ function AnimalDetail() {
   const status = getStatusMessage(timeSinceFed);
 
   return (
-  <div className="max-w-screen-xl mx-auto px-4 py-6">
-    <div className="border border-black rounded shadow-md overflow-hidden">
-
-      <div className="flex flex-col md:flex-row">
-
-        
-        <div className="w-full md:w-[55%]">
-          <FallbackImage
-            src={animal.imageUrl}
-            fallback="/fallback.jpg"
-            alt={animal.name}
-            className={`w-full ${animal.id === 9 ? "h-[750px]" : "h-[600px]"} object-cover`}
-          />
-        </div>
-
-       
-        <div className="w-full md:w-[45%] flex flex-col justify-between p-6">
-          <div>
-            <h2 className="text-2xl font-bold mb-4">{animal.name}</h2>
-            <p className="text-gray-700">{animal.longDescription}</p>
-          </div>
-
-          <div className="mt-6">
-            <p className={`font-bold text-${status.color}-500 mb-2`}>{status.text}</p>
-             <div className="flex justify-between items-center">
-    
-            <button
-              onClick={() => dispatch({ type: "FEED_ANIMAL" })}
-              disabled={timeSinceFed < 4}
-              className={`px-5 py-2 rounded text-white font-semibold ${
-                timeSinceFed >= 4
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-gray-400 cursor-not-allowed"
-              }`}
-            >
-              Mata
-            </button>
-            <button
-      onClick={() => window.history.back()}
-      className="px-4 py-2 bg-sky-700 hover:bg-sky-900 text-white rounded font-semibold"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-screen-xl mx-auto px-4 py-6"
     >
-      Tillbaka
-    </button>
+      <div className="border border-black rounded shadow-md overflow-hidden">
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-[55%]">
+            <FallbackImage
+              src={animal.imageUrl}
+              fallback="/fallback.jpg"
+              alt={animal.name}
+              className={`w-full ${
+                animal.id === 9 ? "h-[750px]" : "h-[600px]"
+              } object-cover`}
+            />
+          </div>
+
+          <div className="w-full md:w-[45%] flex flex-col justify-between p-6">
+            <div>
+              <h2 className="text-2xl font-bold mb-4">{animal.name}</h2>
+              <p className="text-gray-700">{animal.longDescription}</p>
+            </div>
+
+            <div className="mt-6">
+              <p className={`font-bold text-${status.color}-500 mb-2`}>
+                {status.text}
+              </p>
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={() => dispatch({ type: "FEED_ANIMAL" })}
+                  disabled={timeSinceFed < 4}
+                  className={`px-5 py-2 rounded text-white font-semibold ${
+                    timeSinceFed >= 4
+                      ? "bg-green-600 hover:bg-green-700"
+                      : "bg-gray-400 cursor-not-allowed"
+                  }`}
+                >
+                  Mata
+                </button>
+                <button
+                  onClick={() => window.history.back()}
+                  className="px-4 py-2 bg-sky-700 hover:bg-sky-900 text-white rounded font-semibold"
+                >
+                  Tillbaka
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-</div>
       </div>
-    </div>
-  </div>
-);
+    </motion.div>
+  );
 }
 
 export default AnimalDetail;
