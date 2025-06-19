@@ -3,6 +3,7 @@ import { fetchAnimals } from "../service/animalService";
 import type { iAnimal } from "../models/iAnimal";
 import { Link } from "react-router-dom";
 import FallbackImage from "../components/FallbackImage";
+import { motion } from "framer-motion";
 
 function AnimalList() {
   const [animals, setAnimals] = useState<iAnimal[]>([]);
@@ -53,12 +54,12 @@ function AnimalList() {
       {filteredAnimals.length === 0 && <p>Inga djur hittades.</p>}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 list-none" >
-        {filteredAnimals.map((animal) => {
+        {filteredAnimals.map((animal,i) => {
           const lastFed = getLastFed(animal);
           const feedStatus = getFeedStatus(lastFed);
 
           return (
-            <li key={animal.id}  className="my-2 w-full h-full">
+            <motion.li key={animal.id} initial={{opacity:0}} animate={{opacity:1}} transition={{delay:i*0.08,duration:0.4}} className="my-2 w-full h-full">
              <div className="relative w-full h-[500px] rounded overflow-hidden shadow border border-black">
                 <Link
                   to={`/animals/${animal.id}`}
@@ -81,7 +82,7 @@ function AnimalList() {
                   </div>
                 </Link>
               </div>
-            </li>
+            </motion.li>
           );
         })}
       </div>
