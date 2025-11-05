@@ -70,14 +70,8 @@ Ha roligt, skratta och lär er massor!
 ## 🔍 ESLint-varningar:
 
 
-## 🏆 **Betyg: IG**
-📌 **Motivering:** Koden innehåller en grundläggande struktur utan specifik implementation för det beskrivna projektet The Zoo. Ingen router är implementerad för att visa olika sidor, såsom en startsida eller djursidor. Det finns ingen hantering av djurdata, ingen implementerad logik för att mata djur och därmed ingen möjlighet att spara tiden som djuret matas. Ingen hantering av trasiga bildlänkar eller användning av någon annan teknik än ren CSS för styling. Vidare saknas kontext för att kommunicera mellan komponenter, och det saknas en struktur för reducers eller statehantering av djur.
+## 🏆 **Betyg: G**
+📌 **Motivering:** Projektet uppfyller de flesta krav för betyg G, inklusive routing och styling med Tailwind. Dock finns det oklarheter kring hanteringen av trasiga bildlänkar och viss logik för matning, vilket behöver förbättras för ett säkert VG.
 
 💡 **Förbättringsförslag:**  
-För att uppfylla grundkraven för betyg G behöver du: 
-1. Implementera en router (t.ex. React Router) för att hantera navigering mellan olika sidor.
-2. Skapa komponenter och logik för översiktssidan som visar en lista över alla djur och separata djursidor.
-3. Implementera funktionen för att mata djur och spara denna information.
-4. Implementera hantering av trasiga bilder och försäkra att layout och visuell representation hanterar detta på ett bra sätt.
-5. Använd en fler avancerad teknik för styling, exempelvis SCSS, Tailwind CSS eller liknande.
-6. För betyg VG: Implementera en custom hook eller en tjänst för att hämta djurdata. Använd React Context API för att hantera global state och reducers för djurens status. Lägg till animeringar enligt uppgiftens krav.
+Implementera en strategi för att hantera trasiga bildlänkar. Förbättra användningen av context och implementera reducers för att tydligt hantera djurens status. Överväg att inkludera subtila animationer för en bättre användarupplevelse samt säkerställ fullständig implementation enligt kravspecifikationen.
