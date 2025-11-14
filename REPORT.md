@@ -1,7 +1,6 @@
 # 📌 Rättningsrapport – fed24s-the-zoo-antebrinken
 
 ## 🎯 Uppgiftens Krav:
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/xBUCHFwF)
 # The Zoo
 
 I denna inlämningsuppgift kommer ni att bygga ett zoo. Zoo:t har ett antal djur som kommer behöva matas. 
@@ -66,12 +65,17 @@ Välj en teknik gällande css som ni antingen vill lära er mer om eller som ni 
 
 Ha roligt, skratta och lär er massor!
 
-
 ## 🔍 ESLint-varningar:
 
 
-## 🏆 **Betyg: IG**
-📌 **Motivering:** Tekniskt fel vid AI-analys. Kontrollera manuellt.
+## 🏆 **Betyg: G**
+📌 **Motivering:** Projektet uppfyller de grundläggande kraven för betyget G. Studenten har implementerat en router för att visa olika sidor, hanterar trasiga bildlänkar korrekt och använder en alternativ stylingteknik. Funktionaliteten för att mata djur och spara tiden är också på plats. Dock saknas vissa avancerade funktioner och förbättringar som krävs för VG, såsom användning av context och reducers samt subtila animeringar.
 
 💡 **Förbättringsförslag:**  
-Automatisk rättning med AI-assistant misslyckades. Vänligen kontrollera koden manuellt.
+1. **Kodstruktur och Organisation**: Förbättra överskådligheten genom att organisera komponenter, tjänster och stilar i separata mappar. 
+
+2. **Kodkvalitet**: Lägg till fler kommentarer för att förklara komplexa koddelar och följ konsekventa namngivningskonventioner. Minska kodupprepning genom att skapa återanvändbara komponenter och funktioner. 
+
+3. **Funktionalitet**: Åtgärda mindre buggar, såsom felaktig hantering av trasiga bildlänkar i vissa fall, och förbättra användargränssnittet med en mer intuitiv design. 
+
+4. **Best Practices för Frontend**: För att nå VG-nivå, implementera context för delning av tillstånd mellan komponenter, använd reducers för tillståndshantering, och lägg till subtila animeringar för att förbättra användarupplevelsen. Se över användningen av CSS-tekniker och säkerställ att de är konsekventa och effektiva.
